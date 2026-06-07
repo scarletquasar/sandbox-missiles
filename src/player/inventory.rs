@@ -1,9 +1,12 @@
+use bevy::{prelude::Resource, utils::HashMap};
+
 // ===== Items and effects that can be used by the player =====
 pub struct Item {
     pub id: String,
     pub name: String,
     pub description: String,
     pub effect_id: String,
+    pub sprite_path: String,
 }
 
 pub enum Effect {
@@ -27,10 +30,31 @@ pub struct Inventory {
     pub items: Vec<InventoryItem>,
 }
 
+#[derive(Resource, Default)]
+pub struct ItemCatalog {
+    pub items: HashMap<String, Item>,
+}
+
 pub fn create_inventory(max_inventory_size: usize) -> Inventory {
     Inventory {
         max_inventory_size,
         items: Vec::new(),
+    }
+}
+
+pub fn create_item(
+    id: String,
+    name: String,
+    description: String,
+    effect_id: String,
+    sprite_path: String,
+) -> Item {
+    Item {
+        id,
+        name,
+        description,
+        effect_id,
+        sprite_path,
     }
 }
 

@@ -12,6 +12,7 @@ fn main() {
         .insert_resource(ClearColor(Color::srgb(0.0, 0.0, 0.0)))
         .init_resource::<scenes::CurrentScene>()
         .init_resource::<scenes::LevelRegistry>()
+        .init_resource::<player::inventory::ItemCatalog>()
         .add_plugins(
             DefaultPlugins
                 .set(AssetPlugin {
@@ -76,11 +77,24 @@ fn setup(
     );
     commands.entity(hero).insert(player::Player::default());
 
+    let mut inventory = player::inventory::create_inventory(10);
+    let _ = inventory.add_item("hero".to_owned(), 1);
+    let _ = inventory.add_item("terrain".to_owned(), 24);
+
     display_hud(
         &mut commands,
+        asset_server.as_ref(),
+        &create_global_item_catalog(),
         &hud::HudData {
             health: 100,
             energy: 50,
+            inventory,
         },
     );
+}
+
+fn create_global_item_catalog() -> player::inventory::ItemCatalog {
+    let mut item_catalog = player::inventory::ItemCatalog::default();
+
+    item_catalog
 }
