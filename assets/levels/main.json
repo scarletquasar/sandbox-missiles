@@ -1,6 +1,6 @@
 {
   "player_spawn": {
-    "x": 6,
+    "x": 7,
     "y": 4
   },
   "tiles": [
@@ -38,90 +38,6 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "open_water"
-        },
-        "walkable": false,
-        "z_layer": 0.2,
-        "tag": "water"
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "name": "open_water"
-        },
-        "walkable": false,
-        "z_layer": 0.2,
-        "tag": "water"
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "name": "grass_plain"
-        }
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "col": 10,
-          "row": 0
-        },
-        "walkable": false,
-        "z_layer": 0.3,
-        "tag": "sign"
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "col": 11,
-          "row": 0
-        },
-        "walkable": false,
-        "z_layer": 0.3,
-        "tag": "sign"
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "name": "grass_plain"
-        }
-      }
-    ],
-    [
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "name": "grass_plain"
-        }
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "name": "grass_plain"
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ]
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "col": 8,
-          "row": 3
-        }
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "col": 8,
-          "row": 3
-        }
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
           "name": "grass_plain"
         }
       },
@@ -167,6 +83,58 @@
         "sprite": {
           "tileset": "pastoral",
           "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
         },
         "effects": [
           {
@@ -190,8 +158,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 8,
-          "row": 3
+          "name": "grass_plain"
         }
       },
       {
@@ -199,6 +166,327 @@
           "tileset": "pastoral",
           "name": "grass_plain"
         }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      }
+    ],
+    [
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      }
+    ],
+    [
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      }
+    ],
+    [
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      }
+    ],
+    [
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "col": 2,
+          "row": 3
+        },
+        "effects": [
+          {
+            "tile_effect_type": "blockage",
+            "modifier": 0
+          }
+        ]
       },
       {
         "sprite": {
