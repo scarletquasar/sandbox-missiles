@@ -9,7 +9,9 @@ use crate::hud::display_hud;
 
 fn main() {
     App::new()
-        .insert_resource(ClearColor(Color::srgb(0.54, 0.62, 0.39)))
+        .insert_resource(ClearColor(Color::srgb(0.0, 0.0, 0.0)))
+        .init_resource::<scenes::CurrentScene>()
+        .init_resource::<scenes::LevelRegistry>()
         .add_plugins(
             DefaultPlugins
                 .set(AssetPlugin {
@@ -23,6 +25,7 @@ fn main() {
             Update,
             (
                 player::move_player,
+                scenes::reload_levels_during_runtime,
                 sprites::hero_tileset::execute_hero_animations,
             ),
         )
@@ -32,23 +35,43 @@ fn main() {
 fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
+    mut current_scene: ResMut<scenes::CurrentScene>,
+    mut level_registry: ResMut<scenes::LevelRegistry>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
 ) {
     // Instances camera, hud and player
     commands.spawn(Camera2d);
+    let report = level_registry.reload_from_disk();
+    for error in &report.errors {
+        warn!("{error}");
+    }
+
+    let startup_level_name = if level_registry.get("main").is_some() {
+        "main".to_owned()
+    } else {
+        level_registry
+            .first_level_name()
+            .map(str::to_owned)
+            .expect("No levels were found in assets/levels")
+    };
+
     let scene = scenes::spawn_scene(
         &mut commands,
         asset_server.as_ref(),
         texture_atlas_layouts.as_mut(),
-        scenes::SceneName::Main,
-        None,
-    );
+        level_registry.as_ref(),
+        &startup_level_name,
+        current_scene.take(),
+    )
+    .expect("Failed to spawn startup level");
+    let player_spawn = scene.player_spawn;
+    current_scene.replace(scene);
 
     let hero = sprites::hero_tileset::spawn_hero(
         &mut commands,
         asset_server.as_ref(),
         texture_atlas_layouts.as_mut(),
-        scene.player_spawn,
+        player_spawn,
         sprites::hero_tileset::HeroDirection::Front,
     );
     commands.entity(hero).insert(player::Player::default());

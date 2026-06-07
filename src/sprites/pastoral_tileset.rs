@@ -21,23 +21,8 @@ pub struct PastoralTileSprite {
     row: u32,
 }
 
-#[derive(Debug, Clone, Copy)]
-struct AtlasRegion {
-    min: PastoralTileSprite,
-    width: u32,
-    height: u32,
-}
-
 const fn tile(col: u32, row: u32) -> PastoralTileSprite {
     PastoralTileSprite { col, row }
-}
-
-const fn region(col: u32, row: u32, width: u32, height: u32) -> AtlasRegion {
-    AtlasRegion {
-        min: tile(col, row),
-        width,
-        height,
-    }
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -51,6 +36,18 @@ pub enum PastoralSprite {
 }
 
 impl PastoralSprite {
+    pub fn from_name(name: &str) -> Option<Self> {
+        match name {
+            "grass_plain" => Some(Self::GrassPlain),
+            "grass_tuft_left" => Some(Self::GrassTuftLeft),
+            "grass_tuft_right" => Some(Self::GrassTuftRight),
+            "grass_tuft_lower" => Some(Self::GrassTuftLower),
+            "open_water" => Some(Self::OpenWater),
+            "tree_stump" => Some(Self::TreeStump),
+            _ => None,
+        }
+    }
+
     pub const fn tile(self) -> PastoralTileSprite {
         match self {
             Self::GrassPlain => tile(6, 0),
@@ -59,49 +56,6 @@ impl PastoralSprite {
             Self::GrassTuftLower => tile(9, 1),
             Self::OpenWater => tile(6, 2),
             Self::TreeStump => tile(0, 10),
-        }
-    }
-}
-
-#[derive(Debug, Clone, Copy)]
-pub enum PastoralRegion {
-    Pond,
-    Sign,
-    Parchment,
-    Tree,
-    FruitTree,
-    CottageWhite,
-    CottageGray,
-    PathVertical,
-    TrailClearing,
-    CurvedTrail,
-    Field,
-    Flowers,
-    Campfire,
-    BigMountain,
-    SmallMountainTop,
-    SmallMountainBottom,
-}
-
-impl PastoralRegion {
-    const fn atlas_region(self) -> AtlasRegion {
-        match self {
-            Self::Pond => region(0, 0, 6, 6),
-            Self::Sign => region(10, 0, 2, 2),
-            Self::Parchment => region(10, 2, 2, 4),
-            Self::Tree => region(0, 6, 2, 2),
-            Self::FruitTree => region(0, 8, 2, 2),
-            Self::CottageWhite => region(2, 6, 2, 2),
-            Self::CottageGray => region(2, 8, 2, 2),
-            Self::PathVertical => region(4, 6, 2, 4),
-            Self::TrailClearing => region(6, 6, 6, 6),
-            Self::CurvedTrail => region(2, 10, 4, 2),
-            Self::Field => region(0, 12, 6, 2),
-            Self::Flowers => region(0, 14, 2, 2),
-            Self::Campfire => region(2, 14, 4, 2),
-            Self::BigMountain => region(6, 12, 4, 4),
-            Self::SmallMountainTop => region(10, 12, 2, 2),
-            Self::SmallMountainBottom => region(10, 14, 2, 2),
         }
     }
 }
@@ -122,15 +76,6 @@ pub fn load_pastoral_atlas(
     PastoralAtlas { image, layout }
 }
 
-pub fn spawn_pastoral_tile(
-    commands: &mut Commands,
-    atlas: &PastoralAtlas,
-    sprite: PastoralTileSprite,
-    world_position: Vec3,
-) {
-    commands.spawn(pastoral_tile_components(atlas, sprite, world_position));
-}
-
 pub fn pastoral_tile_components(
     atlas: &PastoralAtlas,
     sprite: PastoralTileSprite,
@@ -148,23 +93,11 @@ pub fn pastoral_tile_components(
     )
 }
 
-pub fn region_tiles(region: PastoralRegion) -> Vec<(IVec2, PastoralTileSprite)> {
-    let region = region.atlas_region();
-    let mut tiles = Vec::with_capacity((region.width * region.height) as usize);
-
-    for row in 0..region.height {
-        for col in 0..region.width {
-            tiles.push((
-                IVec2::new(col as i32, row as i32),
-                tile(region.min.col + col, region.min.row + row),
-            ));
-        }
+impl PastoralTileSprite {
+    pub const fn from_grid(col: u32, row: u32) -> Self {
+        Self { col, row }
     }
 
-    tiles
-}
-
-impl PastoralTileSprite {
     fn atlas_index(self) -> usize {
         (self.row * TILE_COLUMNS + self.col) as usize
     }
