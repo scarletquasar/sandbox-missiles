@@ -44,7 +44,9 @@ impl PastoralSprite {
             "grass_tuft_lower" => Some(Self::GrassTuftLower),
             "open_water" => Some(Self::OpenWater),
             "tree_stump" => Some(Self::TreeStump),
-            _ => None,
+            // fallback to open water so we will not have the game panicking when loading
+            // invalid tiles on maps
+            _ => Some(Self::OpenWater),
         }
     }
 
