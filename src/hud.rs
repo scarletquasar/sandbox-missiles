@@ -123,7 +123,6 @@ pub fn display_hud(
                                     TextColor(Color::WHITE),
                                 ));
                             });
-
                         }
                     });
             }

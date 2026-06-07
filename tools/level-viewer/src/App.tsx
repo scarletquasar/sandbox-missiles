@@ -92,19 +92,19 @@ type ReloadEventPayload = {
 
 type InteractionState =
   | {
-      mode: "idle";
-    }
+    mode: "idle";
+  }
   | {
-      mode: "paint";
-      pointerId: number;
-      lastPaintKey: string | null;
-    }
+    mode: "paint";
+    pointerId: number;
+    lastPaintKey: string | null;
+  }
   | {
-      mode: "pan";
-      pointerId: number;
-      lastClientX: number;
-      lastClientY: number;
-    };
+    mode: "pan";
+    pointerId: number;
+    lastClientX: number;
+    lastClientY: number;
+  };
 
 const TILESETS: Record<
   TilesetName,
