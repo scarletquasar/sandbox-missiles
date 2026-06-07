@@ -10,12 +10,16 @@ const PLAYER_SPEED: f32 = 120.0;
 #[derive(Component)]
 pub struct Player {
     speed: f32,
+    health: f32,
+    energy: f32,
 }
 
 impl Default for Player {
     fn default() -> Self {
         Self {
             speed: PLAYER_SPEED,
+            health: 100.0,
+            energy: 100.0,
         }
     }
 }
@@ -26,7 +30,7 @@ pub fn move_player(
     level_registry: Res<LevelRegistry>,
     time: Res<Time>,
     mut player_query: Query<(
-        &Player,
+        &mut Player,
         &mut Transform,
         &mut Sprite,
         &mut HeroAnimation,
@@ -37,7 +41,7 @@ pub fn move_player(
         .current_name()
         .and_then(|scene_name| level_registry.get(scene_name));
 
-    let Ok((player, mut transform, mut sprite, mut animation, mut facing)) =
+    let Ok((mut player, mut transform, mut sprite, mut animation, mut facing)) =
         player_query.get_single_mut()
     else {
         return;
@@ -66,7 +70,7 @@ pub fn move_player(
 
     let can_move = apply_tile_effects(
         target_tile,
-        player,
+        &mut player,
         &mut transform,
         &mut sprite,
         &mut animation,
@@ -115,7 +119,7 @@ fn adjacent_tiles(scene: Option<&SceneDefinition>, player_position: Vec3) -> Adj
 
 fn apply_tile_effects(
     tile: Option<&SceneTile>,
-    _player: &Player,
+    player: &mut Player,
     _transform: &mut Transform,
     _sprite: &mut Sprite,
     _animation: &mut HeroAnimation,
@@ -127,7 +131,9 @@ fn apply_tile_effects(
 
     for effect in &tile.effects.effects {
         if effect.tile_effect_type == "damage" {
+            player.health -= effect.modifier;
         } else if effect.tile_effect_type == "heal" {
+            player.health += effect.modifier;
         } else if effect.tile_effect_type == "slow" {
         } else if effect.tile_effect_type == "speed" {
         } else if effect.tile_effect_type == "teleport" {
