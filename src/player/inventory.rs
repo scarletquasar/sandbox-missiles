@@ -59,7 +59,18 @@ pub fn create_item(
 }
 
 impl Inventory {
-    pub fn add_item(&mut self, item_id: String, quantity: u32) -> Result<(), String> {
+    pub fn add_item(
+        &mut self,
+        item_catalog: &ItemCatalog,
+        item_id: String,
+        quantity: u32,
+    ) -> Result<(), String> {
+        if !item_catalog.items.contains_key(&item_id) {
+            return Err(format!(
+                "Item '{item_id}' does not exist in the item catalog"
+            ));
+        }
+
         if self.items.len() >= self.max_inventory_size {
             return Err("Inventory is full".to_owned());
         }

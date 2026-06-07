@@ -210,8 +210,6 @@ impl JsonGridPosition {
 #[derive(Deserialize)]
 struct JsonLevelTile {
     sprite: JsonSceneSprite,
-    #[serde(default = "default_walkable")]
-    walkable: bool,
     #[serde(default)]
     effects: Vec<JsonLevelTileEffect>,
     #[serde(default)]
@@ -224,7 +222,6 @@ impl JsonLevelTile {
     fn into_scene_tile(self) -> Result<SceneTile, String> {
         Ok(SceneTile {
             sprite: self.sprite.into_scene_sprite()?,
-            walkable: self.walkable,
             effects: TileEffects::from_json(self.effects)?,
             z_layer: self.z_layer,
             tag: self.tag,
@@ -266,6 +263,3 @@ impl JsonSceneSprite {
     }
 }
 
-const fn default_walkable() -> bool {
-    true
-}

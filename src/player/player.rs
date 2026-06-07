@@ -3,9 +3,12 @@ use bevy::prelude::*;
 use crate::{
     scenes::{CurrentScene, LevelRegistry, SceneDefinition, SceneTile},
     sprites::hero_tileset::{set_hero_animation, HeroAnimation, HeroDirection, HeroFacing},
+    sprites::pastoral_tileset::TILE_WORLD_SIZE,
 };
 
 const PLAYER_SPEED: f32 = 120.0;
+const PLAYER_COLLIDER_HALF_EXTENT: f32 = TILE_WORLD_SIZE * 0.5 - 0.001;
+const COLLISION_STEP: f32 = 1.0;
 
 #[derive(Component)]
 pub struct Player {
@@ -37,15 +40,15 @@ pub fn move_player(
         &mut HeroFacing,
     )>,
 ) {
-    let scene = current_scene
-        .current_name()
-        .and_then(|scene_name| level_registry.get(scene_name));
-
     let Ok((mut player, mut transform, mut sprite, mut animation, mut facing)) =
         player_query.get_single_mut()
     else {
         return;
     };
+
+    let scene = current_scene
+        .current_name()
+        .and_then(|scene_name| level_registry.get(scene_name));
 
     let (direction, hero_direction) = match keyboard.get_pressed().next().copied() {
         Some(KeyCode::KeyW) => (Vec2::new(0.0, 1.0), HeroDirection::Back),
@@ -55,31 +58,17 @@ pub fn move_player(
         _ => (Vec2::ZERO, facing.0),
     };
 
-    let next_tiles = adjacent_tiles(scene, transform.translation);
-    let target_tile = if direction.y > 0.0 {
-        next_tiles.up
-    } else if direction.y < 0.0 {
-        next_tiles.down
-    } else if direction.x < 0.0 {
-        next_tiles.left
-    } else if direction.x > 0.0 {
-        next_tiles.right
-    } else {
-        None
-    };
+    let movement = player.speed * time.delta_secs();
+    if direction != Vec2::ZERO && movement > 0.0 {
+        let start_position = transform.translation;
 
-    let can_move = apply_tile_effects(
-        target_tile,
-        &mut player,
-        &mut transform,
-        &mut sprite,
-        &mut animation,
-        &mut facing,
-    );
+        transform.translation.x = move_axis_x(scene, start_position, direction.x * movement);
+        transform.translation.y = move_axis_y(scene, transform.translation, direction.y * movement);
 
-    if direction != Vec2::ZERO && can_move {
-        transform.translation.x += direction.x * player.speed * time.delta_secs();
-        transform.translation.y += direction.y * player.speed * time.delta_secs();
+        if let Some(scene) = scene {
+            let tile = scene.tile_at(scene.world_to_grid(transform.translation));
+            apply_tile_effects(tile, &mut player);
+        }
     }
 
     transform.translation.x = transform.translation.x.round();
@@ -94,39 +83,81 @@ pub fn move_player(
     );
 }
 
-#[derive(Default)]
-struct AdjacentTiles<'a> {
-    up: Option<&'a SceneTile>,
-    down: Option<&'a SceneTile>,
-    left: Option<&'a SceneTile>,
-    right: Option<&'a SceneTile>,
+fn move_axis_x(scene: Option<&SceneDefinition>, current: Vec3, delta: f32) -> f32 {
+    move_axis(scene, current, delta, Axis::X).x
 }
 
-fn adjacent_tiles(scene: Option<&SceneDefinition>, player_position: Vec3) -> AdjacentTiles<'_> {
+fn move_axis_y(scene: Option<&SceneDefinition>, current: Vec3, delta: f32) -> f32 {
+    move_axis(scene, current, delta, Axis::Y).y
+}
+
+#[derive(Clone, Copy)]
+enum Axis {
+    X,
+    Y,
+}
+
+fn move_axis(scene: Option<&SceneDefinition>, current: Vec3, delta: f32, axis: Axis) -> Vec3 {
     let Some(scene) = scene else {
-        return AdjacentTiles::default();
+        return current;
     };
 
-    let player_grid_position = scene.world_to_grid(player_position);
+    let mut remaining = delta.abs();
+    let direction = delta.signum();
+    let mut position = current;
 
-    AdjacentTiles {
-        up: scene.tile_at(player_grid_position + IVec2::new(0, -1)),
-        down: scene.tile_at(player_grid_position + IVec2::new(0, 1)),
-        left: scene.tile_at(player_grid_position + IVec2::new(-1, 0)),
-        right: scene.tile_at(player_grid_position + IVec2::new(1, 0)),
+    while remaining > 0.0 {
+        let step = remaining.min(COLLISION_STEP) * direction;
+        let mut candidate = position;
+
+        match axis {
+            Axis::X => candidate.x += step,
+            Axis::Y => candidate.y += step,
+        }
+
+        if collides_with_blockage(scene, candidate) {
+            break;
+        }
+
+        position = candidate;
+        remaining -= step.abs();
     }
+
+    position
 }
 
-fn apply_tile_effects(
-    tile: Option<&SceneTile>,
-    player: &mut Player,
-    _transform: &mut Transform,
-    _sprite: &mut Sprite,
-    _animation: &mut HeroAnimation,
-    _facing: &mut HeroFacing,
-) -> bool {
+fn collides_with_blockage(scene: &SceneDefinition, position: Vec3) -> bool {
+    let min_x = position.x - PLAYER_COLLIDER_HALF_EXTENT;
+    let max_x = position.x + PLAYER_COLLIDER_HALF_EXTENT;
+    let min_y = position.y - PLAYER_COLLIDER_HALF_EXTENT;
+    let max_y = position.y + PLAYER_COLLIDER_HALF_EXTENT;
+
+    let top_left = scene.world_to_grid(Vec3::new(min_x, max_y, position.z));
+    let bottom_right = scene.world_to_grid(Vec3::new(max_x, min_y, position.z));
+
+    for y in top_left.y..=bottom_right.y {
+        for x in top_left.x..=bottom_right.x {
+            let Some(tile) = scene.tile_at(IVec2::new(x, y)) else {
+                return true;
+            };
+
+            if tile
+                .effects
+                .effects
+                .iter()
+                .any(|effect| effect.tile_effect_type == "blockage")
+            {
+                return true;
+            }
+        }
+    }
+
+    false
+}
+
+fn apply_tile_effects(tile: Option<&SceneTile>, player: &mut Player) {
     let Some(tile) = tile else {
-        return true;
+        return;
     };
 
     for effect in &tile.effects.effects {
@@ -140,9 +171,6 @@ fn apply_tile_effects(
         } else if effect.tile_effect_type == "voyage" {
         } else if effect.tile_effect_type == "message" {
         } else if effect.tile_effect_type == "blockage" {
-            return false;
         }
     }
-
-    true
 }

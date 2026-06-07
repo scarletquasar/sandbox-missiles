@@ -82,14 +82,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "open_water"
-        },
-        "effects": [
-          {
-            "tile_effect_type": "damage",
-            "modifier": 1
-          }
-        ]
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {

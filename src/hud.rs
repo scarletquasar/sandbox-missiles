@@ -5,15 +5,15 @@ use crate::player::inventory::{Inventory, ItemCatalog};
 pub struct HudData {
     pub health: u32,
     pub energy: u32,
-    pub inventory: Inventory,
 }
 
-const INVENTORY_SLOT_SIZE: f32 = 40.0;
-const INVENTORY_SLOT_GAP: f32 = 4.0;
+const INVENTORY_SLOT_SIZE: f32 = 56.0;
+const INVENTORY_SLOT_GAP: f32 = 6.0;
 
 pub fn display_hud(
     commands: &mut Commands,
     asset_server: &AssetServer,
+    inventory: &Inventory,
     item_catalog: &ItemCatalog,
     hud_data: &HudData,
 ) -> HashMap<String, Entity> {
@@ -50,12 +50,12 @@ pub fn display_hud(
         .spawn((
             Node {
                 position_type: PositionType::Absolute,
-                bottom: Val::Px(16.0),
+                bottom: Val::Px(20.0),
                 left: Val::Percent(50.0),
                 margin: UiRect {
                     left: Val::Px(
                         -((INVENTORY_SLOT_SIZE + INVENTORY_SLOT_GAP)
-                            * hud_data.inventory.max_inventory_size as f32
+                            * inventory.max_inventory_size as f32
                             * 0.5),
                     ),
                     ..default()
@@ -63,30 +63,30 @@ pub fn display_hud(
                 flex_direction: FlexDirection::Row,
                 align_items: AlignItems::Center,
                 column_gap: Val::Px(INVENTORY_SLOT_GAP),
-                padding: UiRect::all(Val::Px(6.0)),
-                border: UiRect::all(Val::Px(2.0)),
+                padding: UiRect::all(Val::Px(10.0)),
+                border: UiRect::all(Val::Px(3.0)),
                 ..default()
             },
-            BackgroundColor(Color::srgba(0.06, 0.06, 0.06, 0.85)),
-            BorderColor(Color::srgb(0.75, 0.75, 0.75)),
+            BackgroundColor(Color::srgba(0.96, 0.92, 0.78, 0.94)),
+            BorderColor(Color::srgb(0.20, 0.16, 0.10)),
         ))
         .with_children(|parent| {
-            for slot_index in 0..hud_data.inventory.max_inventory_size {
-                let item = hud_data.inventory.items.get(slot_index);
+            for slot_index in 0..inventory.max_inventory_size {
+                let item = inventory.items.get(slot_index);
 
                 parent
                     .spawn((
                         Node {
                             width: Val::Px(INVENTORY_SLOT_SIZE),
                             height: Val::Px(INVENTORY_SLOT_SIZE),
-                            border: UiRect::all(Val::Px(1.0)),
+                            border: UiRect::all(Val::Px(2.0)),
                             align_items: AlignItems::Center,
                             justify_content: JustifyContent::Center,
                             position_type: PositionType::Relative,
                             ..default()
                         },
-                        BackgroundColor(Color::srgba(0.18, 0.18, 0.18, 0.95)),
-                        BorderColor(Color::srgb(0.45, 0.45, 0.45)),
+                        BackgroundColor(Color::srgba(0.98, 0.97, 0.92, 0.96)),
+                        BorderColor(Color::srgb(0.28, 0.24, 0.18)),
                     ))
                     .with_children(|slot| {
                         if let Some(item) = item {
@@ -96,27 +96,34 @@ pub fn display_hud(
                                         asset_server.load(item_definition.sprite_path.clone()),
                                     ),
                                     Node {
-                                        width: Val::Px(INVENTORY_SLOT_SIZE - 12.0),
-                                        height: Val::Px(INVENTORY_SLOT_SIZE - 12.0),
+                                        width: Val::Px(INVENTORY_SLOT_SIZE - 8.0),
+                                        height: Val::Px(INVENTORY_SLOT_SIZE - 8.0),
                                         ..default()
                                     },
                                 ));
                             }
 
                             slot.spawn((
-                                Text::new(item.quantity.to_string()),
                                 Node {
                                     position_type: PositionType::Absolute,
-                                    right: Val::Px(3.0),
-                                    bottom: Val::Px(1.0),
+                                    left: Val::Px(3.0),
+                                    top: Val::Px(3.0),
+                                    padding: UiRect::axes(Val::Px(4.0), Val::Px(2.0)),
                                     ..default()
                                 },
-                                TextFont {
-                                    font_size: 12.0,
-                                    ..default()
-                                },
-                                TextColor(Color::WHITE),
-                            ));
+                                BackgroundColor(Color::srgba(0.12, 0.10, 0.08, 0.92)),
+                            ))
+                            .with_children(|badge| {
+                                badge.spawn((
+                                    Text::new(item.quantity.to_string()),
+                                    TextFont {
+                                        font_size: 14.0,
+                                        ..default()
+                                    },
+                                    TextColor(Color::WHITE),
+                                ));
+                            });
+
                         }
                     });
             }

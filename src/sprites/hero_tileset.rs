@@ -2,7 +2,7 @@ use std::time::Duration;
 
 use bevy::prelude::*;
 
-pub const HERO_PATH: &str = "hero.png";
+pub const HERO_PATH: &str = "textures/hero.png";
 
 const HERO_FRAME_SIZE: UVec2 = UVec2::new(16, 16);
 const HERO_COLUMNS: u32 = 8;

@@ -45,13 +45,11 @@ struct SceneRoot;
 #[allow(dead_code)]
 pub struct SpawnedSceneTile {
     pub grid_position: IVec2,
-    pub walkable: bool,
 }
 
 #[derive(Clone)]
 pub struct SceneTile {
     pub sprite: SceneSprite,
-    pub walkable: bool,
     pub effects: TileEffects,
     pub z_layer: f32,
     pub tag: Option<String>,
@@ -149,7 +147,6 @@ pub fn spawn_scene(
                         ));
                         entity.insert(SpawnedSceneTile {
                             grid_position,
-                            walkable: tile.walkable,
                         });
 
                         if !tile.effects.is_empty() {

@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-pub const TILESET_PATH: &str = "pastoral-tileset.png";
+pub const TILESET_PATH: &str = "textures/pastoral-tileset.png";
 
 const TILE_SIZE: UVec2 = UVec2::new(16, 16);
 const TILE_SCALE: f32 = 2.0;

@@ -38,6 +38,7 @@ fn setup(
     asset_server: Res<AssetServer>,
     mut current_scene: ResMut<scenes::CurrentScene>,
     mut level_registry: ResMut<scenes::LevelRegistry>,
+    mut item_catalog: ResMut<player::inventory::ItemCatalog>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
 ) {
     // Instances camera, hud and player
@@ -77,24 +78,78 @@ fn setup(
     );
     commands.entity(hero).insert(player::Player::default());
 
+    *item_catalog = create_global_item_catalog();
+
     let mut inventory = player::inventory::create_inventory(10);
-    let _ = inventory.add_item("hero".to_owned(), 1);
-    let _ = inventory.add_item("terrain".to_owned(), 24);
+    inventory
+        .add_item(item_catalog.as_ref(), "potion_red".to_owned(), 1)
+        .expect("Item 'potion_red' must exist in the global item catalog");
+    inventory
+        .add_item(item_catalog.as_ref(), "potion_green".to_owned(), 1)
+        .expect("Item 'potion_green' must exist in the global item catalog");
+    inventory
+        .add_item(item_catalog.as_ref(), "potion_blue".to_owned(), 1)
+        .expect("Item 'potion_blue' must exist in the global item catalog");
+    inventory
+        .add_item(item_catalog.as_ref(), "potion_black".to_owned(), 1)
+        .expect("Item 'potion_black' must exist in the global item catalog");
 
     display_hud(
         &mut commands,
         asset_server.as_ref(),
-        &create_global_item_catalog(),
+        &inventory,
+        item_catalog.as_ref(),
         &hud::HudData {
             health: 100,
             energy: 50,
-            inventory,
         },
     );
 }
 
 fn create_global_item_catalog() -> player::inventory::ItemCatalog {
     let mut item_catalog = player::inventory::ItemCatalog::default();
+
+    let potion_red = player::inventory::create_item(
+        "potion_red".to_owned(),
+        "Red Potion".to_owned(),
+        "A restorative potion".to_owned(),
+        "heal_small".to_owned(),
+        "textures/potion_red.png".to_owned(),
+    );
+    item_catalog.items.insert(potion_red.id.clone(), potion_red);
+
+    let potion_green = player::inventory::create_item(
+        "potion_green".to_owned(),
+        "Green Potion".to_owned(),
+        "A stamina potion".to_owned(),
+        "stamina_boost".to_owned(),
+        "textures/potion_green.png".to_owned(),
+    );
+    item_catalog
+        .items
+        .insert(potion_green.id.clone(), potion_green);
+
+    let potion_blue = player::inventory::create_item(
+        "potion_blue".to_owned(),
+        "Blue Potion".to_owned(),
+        "A mana potion".to_owned(),
+        "mana_restore".to_owned(),
+        "textures/potion_blue.png".to_owned(),
+    );
+    item_catalog
+        .items
+        .insert(potion_blue.id.clone(), potion_blue);
+
+    let potion_black = player::inventory::create_item(
+        "potion_black".to_owned(),
+        "Black Potion".to_owned(),
+        "A mysterious potion".to_owned(),
+        "shadow_step".to_owned(),
+        "textures/potion_black.png".to_owned(),
+    );
+    item_catalog
+        .items
+        .insert(potion_black.id.clone(), potion_black);
 
     item_catalog
 }

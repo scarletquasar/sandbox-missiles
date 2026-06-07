@@ -134,7 +134,6 @@ function normalizeTile(tile, rowIndex, colIndex) {
 
   return {
     sprite: normalizeSprite(tile.sprite),
-    walkable: tile.walkable ?? true,
     zLayer:
       typeof tile.z_layer === "number"
         ? tile.z_layer
@@ -260,10 +259,6 @@ function serializeTile(tile) {
   const payload = {
     sprite: serializeSprite(tile.sprite),
   };
-
-  if (tile.walkable === false) {
-    payload.walkable = false;
-  }
 
   if (tile.zLayer !== 0) {
     payload.z_layer = tile.zLayer;
@@ -397,7 +392,7 @@ if (fs.existsSync(distRoot)) {
 
 ensureLevelsDirectory();
 
-const watcher = chokidar.watch([levelsRoot, path.join(assetsRoot, "pastoral-tileset.png")], {
+const watcher = chokidar.watch([levelsRoot, path.join(assetsRoot, "textures", "pastoral-tileset.png")], {
   ignoreInitial: true,
 });
 
