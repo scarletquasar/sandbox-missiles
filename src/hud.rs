@@ -1,6 +1,9 @@
-use bevy::{prelude::*, utils::HashMap};
+use bevy::prelude::*;
 
-use crate::player::inventory::{Inventory, ItemCatalog};
+use crate::player::{
+    inventory::{Inventory, ItemCatalog},
+    Player, SelectedInventorySlot,
+};
 
 pub struct HudData {
     pub health: u32,
@@ -9,6 +12,24 @@ pub struct HudData {
 
 const INVENTORY_SLOT_SIZE: f32 = 56.0;
 const INVENTORY_SLOT_GAP: f32 = 6.0;
+const HEALTH_BAR_TEXTURE: &str = "textures/bar_red.png";
+const ENERGY_BAR_TEXTURE: &str = "textures/bar_green.png";
+const EMPTY_BAR_TEXTURE: &str = "textures/bar_empty.png";
+const PLAYER_BAR_WIDTH: f32 = 206.0;
+const PLAYER_BAR_HEIGHT: f32 = 27.0;
+const PLAYER_BAR_LEFT: f32 = 12.0;
+const PLAYER_BAR_TOP: f32 = 8.0;
+const PLAYER_BAR_GAP: f32 = 2.0;
+const PLAYER_BAR_MAX_VALUE: f32 = 100.0;
+
+#[derive(Component)]
+pub struct HealthBarFill;
+
+#[derive(Component)]
+pub struct EnergyBarFill;
+
+#[derive(Component)]
+pub struct InventoryHudRoot;
 
 pub fn display_hud(
     commands: &mut Commands,
@@ -16,37 +37,82 @@ pub fn display_hud(
     inventory: &Inventory,
     item_catalog: &ItemCatalog,
     hud_data: &HudData,
-) -> HashMap<String, Entity> {
-    let mut spawned_texts = HashMap::new();
+) {
+    let empty_bar_texture = asset_server.load(EMPTY_BAR_TEXTURE);
+    let health_bar_texture = asset_server.load(HEALTH_BAR_TEXTURE);
+    let energy_bar_texture = asset_server.load(ENERGY_BAR_TEXTURE);
 
-    let health_entity = commands
-        .spawn((
-            Text::new(format!("Health: {}", hud_data.health)),
-            Node {
-                position_type: PositionType::Absolute,
-                top: Val::Px(12.0),
-                left: Val::Px(12.0),
-                ..default()
-            },
-        ))
-        .id();
+    spawn_player_bar(
+        commands,
+        empty_bar_texture.clone(),
+        health_bar_texture,
+        PLAYER_BAR_TOP,
+        hud_value_ratio(hud_data.health),
+        HealthBarFill,
+    );
+    spawn_player_bar(
+        commands,
+        empty_bar_texture,
+        energy_bar_texture,
+        PLAYER_BAR_TOP + PLAYER_BAR_HEIGHT + PLAYER_BAR_GAP,
+        hud_value_ratio(hud_data.energy),
+        EnergyBarFill,
+    );
 
-    let energy_entity = commands
-        .spawn((
-            Text::new(format!("Energy: {}", hud_data.energy)),
-            Node {
-                position_type: PositionType::Absolute,
-                top: Val::Px(36.0),
-                left: Val::Px(12.0),
-                ..default()
-            },
-        ))
-        .id();
+    spawn_inventory_hud(commands, asset_server, inventory, item_catalog, None);
+}
 
-    spawned_texts.insert("health".to_string(), health_entity);
-    spawned_texts.insert("energy".to_string(), energy_entity);
+pub fn update_player_hud(
+    player_query: Query<&Player>,
+    mut health_bar_fills: Query<&mut Node, (With<HealthBarFill>, Without<EnergyBarFill>)>,
+    mut energy_bar_fills: Query<&mut Node, (With<EnergyBarFill>, Without<HealthBarFill>)>,
+) {
+    let Ok(player) = player_query.get_single() else {
+        return;
+    };
 
-    let inventory_visual_entity = commands
+    for mut node in &mut health_bar_fills {
+        set_bar_fill_ratio(&mut node, player.health_ratio());
+    }
+
+    for mut node in &mut energy_bar_fills {
+        set_bar_fill_ratio(&mut node, player.energy_ratio());
+    }
+}
+
+pub fn update_inventory_hud(
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    inventory: Res<Inventory>,
+    item_catalog: Res<ItemCatalog>,
+    selected_slot: Res<SelectedInventorySlot>,
+    inventory_roots: Query<Entity, With<InventoryHudRoot>>,
+) {
+    if !inventory.is_changed() && !selected_slot.is_changed() {
+        return;
+    }
+
+    for entity in &inventory_roots {
+        commands.entity(entity).despawn_recursive();
+    }
+
+    spawn_inventory_hud(
+        &mut commands,
+        asset_server.as_ref(),
+        inventory.as_ref(),
+        item_catalog.as_ref(),
+        selected_slot.slot_index,
+    );
+}
+
+fn spawn_inventory_hud(
+    commands: &mut Commands,
+    asset_server: &AssetServer,
+    inventory: &Inventory,
+    item_catalog: &ItemCatalog,
+    selected_slot: Option<usize>,
+) {
+    commands
         .spawn((
             Node {
                 position_type: PositionType::Absolute,
@@ -69,10 +135,22 @@ pub fn display_hud(
             },
             BackgroundColor(Color::srgba(0.96, 0.92, 0.78, 0.94)),
             BorderColor(Color::srgb(0.20, 0.16, 0.10)),
+            InventoryHudRoot,
         ))
         .with_children(|parent| {
             for slot_index in 0..inventory.max_inventory_size {
                 let item = inventory.items.get(slot_index);
+                let is_selected = selected_slot == Some(slot_index);
+                let slot_background = if is_selected {
+                    Color::srgba(0.72, 0.84, 1.0, 0.98)
+                } else {
+                    Color::srgba(0.98, 0.97, 0.92, 0.96)
+                };
+                let slot_border = if is_selected {
+                    Color::srgb(0.16, 0.46, 1.0)
+                } else {
+                    Color::srgb(0.28, 0.24, 0.18)
+                };
 
                 parent
                     .spawn((
@@ -85,8 +163,8 @@ pub fn display_hud(
                             position_type: PositionType::Relative,
                             ..default()
                         },
-                        BackgroundColor(Color::srgba(0.98, 0.97, 0.92, 0.96)),
-                        BorderColor(Color::srgb(0.28, 0.24, 0.18)),
+                        BackgroundColor(slot_background),
+                        BorderColor(slot_border),
                     ))
                     .with_children(|slot| {
                         if let Some(item) = item {
@@ -126,10 +204,75 @@ pub fn display_hud(
                         }
                     });
             }
+        });
+}
+
+fn spawn_player_bar<T: Component>(
+    commands: &mut Commands,
+    empty_texture: Handle<Image>,
+    fill_texture: Handle<Image>,
+    top: f32,
+    fill_ratio: f32,
+    fill_marker: T,
+) {
+    commands
+        .spawn(Node {
+            position_type: PositionType::Absolute,
+            top: Val::Px(top),
+            left: Val::Px(PLAYER_BAR_LEFT),
+            width: Val::Px(PLAYER_BAR_WIDTH),
+            height: Val::Px(PLAYER_BAR_HEIGHT),
+            ..default()
         })
-        .id();
+        .with_children(|bar| {
+            bar.spawn((
+                ImageNode::new(empty_texture),
+                Node {
+                    position_type: PositionType::Absolute,
+                    top: Val::Px(0.0),
+                    left: Val::Px(0.0),
+                    width: Val::Px(PLAYER_BAR_WIDTH),
+                    height: Val::Px(PLAYER_BAR_HEIGHT),
+                    ..default()
+                },
+            ));
 
-    spawned_texts.insert("inventory".to_string(), inventory_visual_entity);
+            bar.spawn((
+                Node {
+                    position_type: PositionType::Absolute,
+                    top: Val::Px(0.0),
+                    left: Val::Px(0.0),
+                    width: Val::Px(bar_fill_width(fill_ratio)),
+                    height: Val::Px(PLAYER_BAR_HEIGHT),
+                    overflow: Overflow::clip(),
+                    ..default()
+                },
+                fill_marker,
+            ))
+            .with_children(|fill| {
+                fill.spawn((
+                    ImageNode::new(fill_texture),
+                    Node {
+                        position_type: PositionType::Absolute,
+                        top: Val::Px(0.0),
+                        left: Val::Px(0.0),
+                        width: Val::Px(PLAYER_BAR_WIDTH),
+                        height: Val::Px(PLAYER_BAR_HEIGHT),
+                        ..default()
+                    },
+                ));
+            });
+        });
+}
 
-    spawned_texts
+fn set_bar_fill_ratio(node: &mut Node, ratio: f32) {
+    node.width = Val::Px(bar_fill_width(ratio));
+}
+
+fn bar_fill_width(ratio: f32) -> f32 {
+    PLAYER_BAR_WIDTH * ratio.clamp(0.0, 1.0)
+}
+
+fn hud_value_ratio(value: u32) -> f32 {
+    (value as f32 / PLAYER_BAR_MAX_VALUE).clamp(0.0, 1.0)
 }

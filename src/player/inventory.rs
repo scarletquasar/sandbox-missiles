@@ -9,6 +9,7 @@ pub struct Item {
     pub sprite_path: String,
 }
 
+#[derive(Clone)]
 pub enum Effect {
     DamageToEnemies(f32, f32), // damage and range in tiles [1 - 9] always square
     Heal(f32),                 // amount of healing, cant exceed player's max health
@@ -25,6 +26,7 @@ pub struct InventoryItem {
     pub quantity: u32,
 }
 
+#[derive(Resource)]
 pub struct Inventory {
     pub max_inventory_size: usize,
     pub items: Vec<InventoryItem>,
@@ -33,6 +35,7 @@ pub struct Inventory {
 #[derive(Resource, Default)]
 pub struct ItemCatalog {
     pub items: HashMap<String, Item>,
+    pub effects: HashMap<String, Effect>,
 }
 
 pub fn create_inventory(max_inventory_size: usize) -> Inventory {

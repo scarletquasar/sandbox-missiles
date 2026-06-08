@@ -7,8 +7,14 @@ use crate::{
 };
 
 const PLAYER_SPEED: f32 = 120.0;
+const PLAYER_MAX_HEALTH: f32 = 100.0;
+const PLAYER_MAX_ENERGY: f32 = 100.0;
+const PLAYER_ENERGY_REGEN_AMOUNT: f32 = 10.0;
+const PLAYER_ENERGY_REGEN_INTERVAL_SECONDS: f32 = 5.0;
 const PLAYER_COLLIDER_HALF_EXTENT: f32 = TILE_WORLD_SIZE * 0.5 - 0.001;
 const COLLISION_STEP: f32 = 1.0;
+const CAMERA_FOLLOW_SPEED_MULTIPLIER: f32 = 0.8;
+const CAMERA_FOLLOW_SNAP_DISTANCE: f32 = 0.5;
 
 #[derive(Component)]
 pub struct Player {
@@ -21,10 +27,77 @@ impl Default for Player {
     fn default() -> Self {
         Self {
             speed: PLAYER_SPEED,
-            health: 100.0,
-            energy: 100.0,
+            health: PLAYER_MAX_HEALTH,
+            energy: PLAYER_MAX_ENERGY,
         }
     }
+}
+
+impl Player {
+    pub fn health(&self) -> f32 {
+        self.health
+    }
+
+    pub fn energy(&self) -> f32 {
+        self.energy
+    }
+
+    pub fn health_ratio(&self) -> f32 {
+        player_stat_ratio(self.health, PLAYER_MAX_HEALTH)
+    }
+
+    pub fn energy_ratio(&self) -> f32 {
+        player_stat_ratio(self.energy, PLAYER_MAX_ENERGY)
+    }
+
+    pub fn try_spend_energy(&mut self, amount: f32) -> bool {
+        if self.energy < amount {
+            return false;
+        }
+
+        self.energy -= amount;
+        true
+    }
+
+    fn regenerate_energy(&mut self) {
+        self.energy = (self.energy + PLAYER_ENERGY_REGEN_AMOUNT).min(PLAYER_MAX_ENERGY);
+    }
+}
+
+fn player_stat_ratio(value: f32, max: f32) -> f32 {
+    if max <= 0.0 {
+        return 0.0;
+    }
+
+    (value / max).clamp(0.0, 1.0)
+}
+
+#[derive(Resource)]
+pub struct PlayerEnergyRegenTimer(Timer);
+
+impl Default for PlayerEnergyRegenTimer {
+    fn default() -> Self {
+        Self(Timer::from_seconds(
+            PLAYER_ENERGY_REGEN_INTERVAL_SECONDS,
+            TimerMode::Repeating,
+        ))
+    }
+}
+
+pub fn regenerate_player_energy(
+    time: Res<Time>,
+    mut timer: ResMut<PlayerEnergyRegenTimer>,
+    mut player_query: Query<&mut Player>,
+) {
+    if !timer.0.tick(time.delta()).just_finished() {
+        return;
+    }
+
+    let Ok(mut player) = player_query.get_single_mut() else {
+        return;
+    };
+
+    player.regenerate_energy();
 }
 
 pub fn move_player(
@@ -81,6 +154,37 @@ pub fn move_player(
         hero_direction,
         direction != Vec2::ZERO,
     );
+}
+
+pub fn follow_player_camera(
+    time: Res<Time>,
+    player_query: Query<(&Player, &Transform)>,
+    mut camera_query: Query<&mut Transform, (With<Camera2d>, Without<Player>)>,
+) {
+    let Ok((player, player_transform)) = player_query.get_single() else {
+        return;
+    };
+
+    let Ok(mut camera_transform) = camera_query.get_single_mut() else {
+        return;
+    };
+
+    let current = camera_transform.translation.truncate();
+    let target = player_transform.translation.truncate();
+    let to_target = target - current;
+    let distance = to_target.length();
+
+    if distance <= CAMERA_FOLLOW_SNAP_DISTANCE {
+        camera_transform.translation.x = target.x;
+        camera_transform.translation.y = target.y;
+        return;
+    }
+
+    let max_step = player.speed * CAMERA_FOLLOW_SPEED_MULTIPLIER * time.delta_secs();
+    let next = current + to_target.normalize() * max_step.min(distance);
+
+    camera_transform.translation.x = next.x;
+    camera_transform.translation.y = next.y;
 }
 
 fn move_axis_x(scene: Option<&SceneDefinition>, current: Vec3, delta: f32) -> f32 {

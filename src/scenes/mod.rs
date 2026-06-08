@@ -145,9 +145,7 @@ pub fn spawn_scene(
                             sprite,
                             world_position,
                         ));
-                        entity.insert(SpawnedSceneTile {
-                            grid_position,
-                        });
+                        entity.insert(SpawnedSceneTile { grid_position });
 
                         if !tile.effects.is_empty() {
                             entity.insert(tile.effects.clone());

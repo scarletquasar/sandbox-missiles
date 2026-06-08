@@ -13,6 +13,8 @@ fn main() {
         .init_resource::<scenes::CurrentScene>()
         .init_resource::<scenes::LevelRegistry>()
         .init_resource::<player::inventory::ItemCatalog>()
+        .init_resource::<player::PlayerEnergyRegenTimer>()
+        .init_resource::<player::SelectedInventorySlot>()
         .add_plugins(
             DefaultPlugins
                 .set(AssetPlugin {
@@ -25,7 +27,17 @@ fn main() {
         .add_systems(
             Update,
             (
-                player::move_player,
+                (player::move_player, player::follow_player_camera).chain(),
+                (
+                    player::select_inventory_item,
+                    player::drop_selected_item_effect,
+                    player::regenerate_player_energy,
+                    hud::update_player_hud,
+                    hud::update_inventory_hud,
+                )
+                    .chain(),
+                player::animate_potion_missiles,
+                player::animate_potion_impacts,
                 scenes::reload_levels_during_runtime,
                 sprites::hero_tileset::execute_hero_animations,
             ),
@@ -42,7 +54,7 @@ fn setup(
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
 ) {
     // Instances camera, hud and player
-    commands.spawn(Camera2d);
+    let camera = commands.spawn(Camera2d).id();
     let report = level_registry.reload_from_disk();
     for error in &report.errors {
         warn!("{error}");
@@ -68,6 +80,9 @@ fn setup(
     .expect("Failed to spawn startup level");
     let player_spawn = scene.player_spawn;
     current_scene.replace(scene);
+    commands
+        .entity(camera)
+        .insert(Transform::from_xyz(player_spawn.x, player_spawn.y, 0.0));
 
     let hero = sprites::hero_tileset::spawn_hero(
         &mut commands,
@@ -101,19 +116,37 @@ fn setup(
         item_catalog.as_ref(),
         &hud::HudData {
             health: 100,
-            energy: 50,
+            energy: 100,
         },
     );
+
+    commands.insert_resource(inventory);
 }
 
 fn create_global_item_catalog() -> player::inventory::ItemCatalog {
     let mut item_catalog = player::inventory::ItemCatalog::default();
+    item_catalog.effects.insert(
+        "red_missile".to_owned(),
+        player::inventory::Effect::DamageToEnemies(20.0, 2.0),
+    );
+    item_catalog.effects.insert(
+        "green_missile".to_owned(),
+        player::inventory::Effect::DamageToEnemies(30.0, 4.0),
+    );
+    item_catalog.effects.insert(
+        "blue_missile".to_owned(),
+        player::inventory::Effect::DamageToEnemies(40.0, 6.0),
+    );
+    item_catalog.effects.insert(
+        "black_missile".to_owned(),
+        player::inventory::Effect::DamageToEnemies(55.0, 9.0),
+    );
 
     let potion_red = player::inventory::create_item(
         "potion_red".to_owned(),
         "Red Potion".to_owned(),
-        "A restorative potion".to_owned(),
-        "heal_small".to_owned(),
+        "Calls a small crimson missile".to_owned(),
+        "red_missile".to_owned(),
         "textures/potion_red.png".to_owned(),
     );
     item_catalog.items.insert(potion_red.id.clone(), potion_red);
@@ -121,8 +154,8 @@ fn create_global_item_catalog() -> player::inventory::ItemCatalog {
     let potion_green = player::inventory::create_item(
         "potion_green".to_owned(),
         "Green Potion".to_owned(),
-        "A stamina potion".to_owned(),
-        "stamina_boost".to_owned(),
+        "Calls a wider verdant missile".to_owned(),
+        "green_missile".to_owned(),
         "textures/potion_green.png".to_owned(),
     );
     item_catalog
@@ -132,8 +165,8 @@ fn create_global_item_catalog() -> player::inventory::ItemCatalog {
     let potion_blue = player::inventory::create_item(
         "potion_blue".to_owned(),
         "Blue Potion".to_owned(),
-        "A mana potion".to_owned(),
-        "mana_restore".to_owned(),
+        "Calls a broad azure missile".to_owned(),
+        "blue_missile".to_owned(),
         "textures/potion_blue.png".to_owned(),
     );
     item_catalog
@@ -143,8 +176,8 @@ fn create_global_item_catalog() -> player::inventory::ItemCatalog {
     let potion_black = player::inventory::create_item(
         "potion_black".to_owned(),
         "Black Potion".to_owned(),
-        "A mysterious potion".to_owned(),
-        "shadow_step".to_owned(),
+        "Calls the largest shadow missile".to_owned(),
+        "black_missile".to_owned(),
         "textures/potion_black.png".to_owned(),
     );
     item_catalog
