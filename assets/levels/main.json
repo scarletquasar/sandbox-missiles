@@ -6113,14 +6113,14 @@
           "col": 10,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -6128,14 +6128,14 @@
           "col": 11,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -6861,14 +6861,14 @@
           "col": 10,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -6876,14 +6876,14 @@
           "col": 11,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -7609,14 +7609,14 @@
           "col": 10,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -7624,14 +7624,14 @@
           "col": 11,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -7887,14 +7887,14 @@
           "col": 0,
           "row": 6
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -7902,14 +7902,14 @@
           "col": 1,
           "row": 6
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -8635,14 +8635,14 @@
           "col": 0,
           "row": 7
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -8650,14 +8650,14 @@
           "col": 1,
           "row": 7
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -9302,17 +9302,16 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 10
+          "name": "tree_stump"
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "stump",
-        "z_layer": 0.2
+        "tag": "stump"
       },
       {
         "sprite": {
@@ -9392,14 +9391,14 @@
           "col": 0,
           "row": 8
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -9407,14 +9406,14 @@
           "col": 1,
           "row": 8
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -9446,14 +9445,14 @@
           "col": 0,
           "row": 6
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -9461,14 +9460,14 @@
           "col": 1,
           "row": 6
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -10158,14 +10157,14 @@
           "col": 0,
           "row": 9
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -10173,14 +10172,14 @@
           "col": 1,
           "row": 9
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -10212,14 +10211,14 @@
           "col": 0,
           "row": 7
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -10227,14 +10226,14 @@
           "col": 1,
           "row": 7
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -10960,14 +10959,14 @@
           "col": 0,
           "row": 8
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -10975,14 +10974,14 @@
           "col": 1,
           "row": 8
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -11708,14 +11707,14 @@
           "col": 0,
           "row": 9
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -11723,14 +11722,14 @@
           "col": 1,
           "row": 9
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "tree",
-        "z_layer": 0.2
+        "tag": "tree"
       },
       {
         "sprite": {
@@ -12127,32 +12126,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 2,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "house",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 3,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "house",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -12396,14 +12377,14 @@
           "col": 2,
           "row": 6
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "house",
-        "z_layer": 0.2
+        "tag": "house"
       },
       {
         "sprite": {
@@ -12411,14 +12392,14 @@
           "col": 3,
           "row": 6
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "house",
-        "z_layer": 0.2
+        "tag": "house"
       },
       {
         "sprite": {
@@ -12749,32 +12730,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 2,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "house",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 3,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "house",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -13018,14 +12981,14 @@
           "col": 2,
           "row": 7
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "house",
-        "z_layer": 0.2
+        "tag": "house"
       },
       {
         "sprite": {
@@ -13033,14 +12996,14 @@
           "col": 3,
           "row": 7
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "house",
-        "z_layer": 0.2
+        "tag": "house"
       },
       {
         "sprite": {
@@ -13371,32 +13334,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 2,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "house",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 3,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "house",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -13640,14 +13585,14 @@
           "col": 2,
           "row": 8
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "house",
-        "z_layer": 0.2
+        "tag": "house"
       },
       {
         "sprite": {
@@ -13655,14 +13600,14 @@
           "col": 3,
           "row": 8
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "house",
-        "z_layer": 0.2
+        "tag": "house"
       },
       {
         "sprite": {
@@ -13993,32 +13938,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 2,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "house",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 3,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "house",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -14262,14 +14189,14 @@
           "col": 2,
           "row": 9
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "house",
-        "z_layer": 0.2
+        "tag": "house"
       },
       {
         "sprite": {
@@ -14277,14 +14204,14 @@
           "col": 3,
           "row": 9
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "house",
-        "z_layer": 0.2
+        "tag": "house"
       },
       {
         "sprite": {
@@ -15159,32 +15086,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -15787,32 +15696,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -16379,32 +16270,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -16457,32 +16330,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -17049,32 +16904,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -17127,32 +16964,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -17719,32 +17538,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -17767,32 +17568,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -18365,32 +18148,20 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -18413,32 +18184,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "col": 1,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -18926,14 +18673,14 @@
           "col": 10,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -18941,14 +18688,14 @@
           "col": 11,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -19063,32 +18810,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -19576,14 +19305,14 @@
           "col": 10,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -19591,14 +19320,14 @@
           "col": 11,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -19713,32 +19442,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -19839,17 +19550,16 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 10
+          "name": "tree_stump"
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "stump",
-        "z_layer": 0.2
+        "tag": "stump"
       },
       {
         "sprite": {
@@ -20076,17 +19786,16 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 10
+          "name": "tree_stump"
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "stump",
-        "z_layer": 0.2
+        "tag": "stump"
       },
       {
         "sprite": {
@@ -20142,14 +19851,14 @@
           "col": 10,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -20157,14 +19866,14 @@
           "col": 11,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -20262,14 +19971,14 @@
           "col": 10,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -20277,14 +19986,14 @@
           "col": 11,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -20792,14 +20501,14 @@
           "col": 10,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -20807,14 +20516,14 @@
           "col": 11,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -21424,14 +21133,14 @@
           "col": 10,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -21439,14 +21148,14 @@
           "col": 11,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -28185,47 +27894,20 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 12
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "logs",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 12
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "logs",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 2,
-          "row": 12
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "logs",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -28374,7 +28056,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_plain"
+          "col": 8,
+          "row": 1
         }
       },
       {
@@ -28517,14 +28200,14 @@
           "col": 10,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -28532,14 +28215,14 @@
           "col": 11,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -28816,47 +28499,20 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 13
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "logs",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 13
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "logs",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 2,
-          "row": 13
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "logs",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -28993,7 +28649,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_plain"
+          "col": 8,
+          "row": 1
         }
       },
       {
@@ -29148,14 +28805,14 @@
           "col": 10,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -29163,14 +28820,14 @@
           "col": 11,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -29256,14 +28913,14 @@
           "col": 6,
           "row": 12
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -29271,14 +28928,14 @@
           "col": 7,
           "row": 12
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -29286,14 +28943,14 @@
           "col": 8,
           "row": 12
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -29301,14 +28958,14 @@
           "col": 9,
           "row": 12
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -29621,7 +29278,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_plain"
+          "col": 8,
+          "row": 1
         }
       },
       {
@@ -29788,14 +29446,14 @@
           "col": 10,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -29803,14 +29461,14 @@
           "col": 11,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -29896,14 +29554,14 @@
           "col": 6,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -29911,14 +29569,14 @@
           "col": 7,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -29926,14 +29584,14 @@
           "col": 8,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -29941,14 +29599,14 @@
           "col": 9,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -30249,32 +29907,15 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 10,
-          "row": 13
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "rock",
-        "z_layer": 0.2
+          "col": 8,
+          "row": 1
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 11,
-          "row": 13
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "rock",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -30536,14 +30177,14 @@
           "col": 6,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -30551,14 +30192,14 @@
           "col": 7,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -30566,14 +30207,14 @@
           "col": 8,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -30581,14 +30222,14 @@
           "col": 9,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -30877,7 +30518,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_plain"
+          "col": 8,
+          "row": 1
         }
       },
       {
@@ -30892,14 +30534,14 @@
           "col": 10,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -30907,14 +30549,14 @@
           "col": 11,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -31176,14 +30818,14 @@
           "col": 6,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -31191,14 +30833,14 @@
           "col": 7,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -31206,14 +30848,14 @@
           "col": 8,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -31221,14 +30863,14 @@
           "col": 9,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "mountain",
-        "z_layer": 0.2
+        "tag": "mountain"
       },
       {
         "sprite": {
@@ -31505,7 +31147,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_plain"
+          "col": 8,
+          "row": 1
         }
       },
       {
@@ -31532,14 +31175,14 @@
           "col": 10,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -31547,14 +31190,14 @@
           "col": 11,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -31852,14 +31495,14 @@
           "col": 10,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -31867,14 +31510,14 @@
           "col": 11,
           "row": 13
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -32169,17 +31812,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 10
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "stump",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -32465,14 +32099,14 @@
           "col": 10,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -32480,14 +32114,14 @@
           "col": 11,
           "row": 14
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -33069,14 +32703,14 @@
           "col": 10,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -33084,14 +32718,14 @@
           "col": 11,
           "row": 15
         },
+        "z_layer": 0.2,
         "effects": [
           {
             "tile_effect_type": "blockage",
             "modifier": 0
           }
         ],
-        "tag": "rock",
-        "z_layer": 0.2
+        "tag": "rock"
       },
       {
         "sprite": {
@@ -34408,32 +34042,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -35012,32 +34628,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -35228,7 +34826,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -35616,32 +35214,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -35676,32 +35256,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 6
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -35838,7 +35400,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -36238,32 +35800,8 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
-      },
-      {
-        "sprite": {
-          "tileset": "pastoral",
-          "col": 1,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -36298,32 +35836,20 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 7
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
+      },
+      {
+        "sprite": {
+          "tileset": "pastoral",
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -36448,7 +35974,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -36902,32 +36428,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 8
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -37040,7 +36548,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -37506,32 +37014,14 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 0,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
           "tileset": "pastoral",
-          "col": 1,
-          "row": 9
-        },
-        "effects": [
-          {
-            "tile_effect_type": "blockage",
-            "modifier": 0
-          }
-        ],
-        "tag": "tree",
-        "z_layer": 0.2
+          "name": "grass_plain"
+        }
       },
       {
         "sprite": {
@@ -37632,7 +37122,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -38206,7 +37696,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -38780,7 +38270,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -39346,7 +38836,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -39912,7 +39402,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
@@ -40478,7 +39968,7 @@
       {
         "sprite": {
           "tileset": "pastoral",
-          "name": "grass_tuft_left"
+          "name": "grass_plain"
         }
       },
       {
