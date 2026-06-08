@@ -142,6 +142,8 @@ const DEFAULT_BRUSH: Brush = {
 };
 
 const DEFAULT_EFFECT_FILTER = true;
+const ZOOM_LEVELS = [2, 4, 6] as const;
+const DEFAULT_ZOOM = 4;
 
 function useLevelImages(cacheBust: number) {
   const imageCache = useRef(new Map<string, HTMLImageElement>());
@@ -352,6 +354,15 @@ function getEffectOverlayColor(effects: LevelTileEffect[]) {
   return matchedEffect ? EFFECT_OVERLAY_COLORS[matchedEffect] : null;
 }
 
+function getPaletteTiles(tilesetName: TilesetName): GridPosition[] {
+  const tileset = TILESETS[tilesetName];
+
+  return Array.from({ length: tileset.columns * tileset.rows }, (_, index) => ({
+    col: index % tileset.columns,
+    row: Math.floor(index / tileset.columns),
+  }));
+}
+
 function getPreferredLevel(
   availableLevelNames: string[],
   currentLevelName: string | null,
@@ -416,11 +427,51 @@ function getCenteredOffset(level: LevelData, viewportSize: ViewportSize, zoom: n
   };
 }
 
+function getPlayerSpawnOffset(
+  level: LevelData,
+  viewportSize: ViewportSize,
+  zoom: number,
+): ViewOffset {
+  const worldTileSize = TILESETS.pastoral.tileSize * zoom;
+
+  return {
+    x: Math.round(viewportSize.width * 0.5 - (level.playerSpawn.x + 0.5) * worldTileSize),
+    y: Math.round(viewportSize.height * 0.5 - (level.playerSpawn.y + 0.5) * worldTileSize),
+  };
+}
+
+function getZoomedOffset(
+  previousOffset: ViewOffset,
+  previousZoom: number,
+  nextZoom: number,
+  viewportSize: ViewportSize,
+): ViewOffset {
+  const previousTileSize = TILESETS.pastoral.tileSize * previousZoom;
+  const nextTileSize = TILESETS.pastoral.tileSize * nextZoom;
+  const centerTileX = (viewportSize.width * 0.5 - previousOffset.x) / previousTileSize;
+  const centerTileY = (viewportSize.height * 0.5 - previousOffset.y) / previousTileSize;
+
+  return {
+    x: Math.round(viewportSize.width * 0.5 - centerTileX * nextTileSize),
+    y: Math.round(viewportSize.height * 0.5 - centerTileY * nextTileSize),
+  };
+}
+
+function getZoomStep(currentZoom: number, direction: -1 | 1) {
+  const currentIndex = ZOOM_LEVELS.findIndex((zoomLevel) => zoomLevel === currentZoom);
+  const nextIndex = Math.min(
+    ZOOM_LEVELS.length - 1,
+    Math.max(0, currentIndex + direction),
+  );
+
+  return ZOOM_LEVELS[nextIndex] ?? currentZoom;
+}
+
 export function App() {
   const [levelNames, setLevelNames] = useState<string[]>([]);
   const [currentLevelName, setCurrentLevelName] = useState<string | null>(null);
   const [currentLevel, setCurrentLevel] = useState<LevelData | null>(null);
-  const [zoom, setZoom] = useState(4);
+  const [zoom, setZoom] = useState(DEFAULT_ZOOM);
   const [showGrid, setShowGrid] = useState(true);
   const [showEffectOverlay, setShowEffectOverlay] = useState(DEFAULT_EFFECT_FILTER);
   const [status, setStatus] = useState("Connecting…");
@@ -437,7 +488,6 @@ export function App() {
   const [selectedGrid, setSelectedGrid] = useState<GridPosition | null>(null);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const paletteCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const viewerViewportRef = useRef<HTMLDivElement | null>(null);
   const interactionRef = useRef<InteractionState>({ mode: "idle" });
   const currentLevelRef = useRef<LevelData | null>(null);
@@ -491,6 +541,8 @@ export function App() {
 
     return currentLevel.tiles[hoveredGrid.row][hoveredGrid.col];
   }, [currentLevel, hoveredGrid]);
+
+  const paletteTiles = useMemo(() => getPaletteTiles("pastoral"), []);
 
   useEffect(() => {
     currentLevelRef.current = currentLevel;
@@ -733,35 +785,6 @@ export function App() {
     }
   };
 
-  const renderPalette = async () => {
-    const canvas = paletteCanvasRef.current;
-    if (!canvas) {
-      return;
-    }
-
-    const image = await loadTilesetImage("pastoral");
-    const context = canvas.getContext("2d");
-    if (!context) {
-      return;
-    }
-
-    canvas.width = image.naturalWidth * PALETTE_SCALE;
-    canvas.height = image.naturalHeight * PALETTE_SCALE;
-    context.imageSmoothingEnabled = false;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-    const selectionSize = TILESETS.pastoral.tileSize * PALETTE_SCALE;
-    context.strokeStyle = "#ef4444";
-    context.lineWidth = 3;
-    context.strokeRect(
-      brush.sprite.col * selectionSize + 1.5,
-      brush.sprite.row * selectionSize + 1.5,
-      selectionSize - 3,
-      selectionSize - 3,
-    );
-  };
-
   const refreshLevelList = async () => {
     const payload = await fetchJson<LevelApiSummary>("/api/levels");
     setLevelNames(payload.levels);
@@ -837,10 +860,6 @@ export function App() {
   useEffect(() => {
     void renderLevel(currentLevel);
   }, [currentLevel, zoom, showGrid, showEffectOverlay, cacheBust, viewOffset, viewportSize, hoveredGrid, selectedGrid]);
-
-  useEffect(() => {
-    void renderPalette();
-  }, [cacheBust, brush.sprite.col, brush.sprite.row]);
 
   useEffect(() => {
     void refreshViewer(true).catch((error: Error) => {
@@ -929,6 +948,35 @@ export function App() {
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const moveToPlayerStart = () => {
+    const level = currentLevelRef.current;
+    if (!level) {
+      return;
+    }
+
+    setViewOffset(getPlayerSpawnOffset(level, viewportSize, zoomRef.current));
+    setSelectedGrid({
+      col: level.playerSpawn.x,
+      row: level.playerSpawn.y,
+    });
+    setStatus(`Moved to player start (${level.playerSpawn.x}, ${level.playerSpawn.y})`);
+  };
+
+  const changeZoom = (nextZoom: number) => {
+    if (nextZoom === zoom) {
+      return;
+    }
+
+    setViewOffset((previousOffset) =>
+      getZoomedOffset(previousOffset, zoom, nextZoom, viewportSize),
+    );
+    setZoom(nextZoom);
+  };
+
+  const stepZoom = (direction: -1 | 1) => {
+    changeZoom(getZoomStep(zoom, direction));
   };
 
   const handleCanvasPointerDown = (event: ReactPointerEvent<HTMLCanvasElement>) => {
@@ -1058,29 +1106,7 @@ export function App() {
     interactionRef.current = { mode: "idle" };
   };
 
-  const handlePalettePointerDown = async (
-    event: ReactPointerEvent<HTMLCanvasElement>,
-  ) => {
-    const canvas = paletteCanvasRef.current;
-    if (!canvas) {
-      return;
-    }
-
-    event.preventDefault();
-    const bounds = canvas.getBoundingClientRect();
-    const scaledTileSize = TILESETS.pastoral.tileSize * PALETTE_SCALE;
-    const col = Math.floor((event.clientX - bounds.left) / scaledTileSize);
-    const row = Math.floor((event.clientY - bounds.top) / scaledTileSize);
-
-    if (
-      col < 0 ||
-      row < 0 ||
-      col >= TILESETS.pastoral.columns ||
-      row >= TILESETS.pastoral.rows
-    ) {
-      return;
-    }
-
+  const selectPaletteTile = (col: number, row: number) => {
     setBrush((previousBrush) => ({
       ...previousBrush,
       sprite: {
@@ -1089,6 +1115,7 @@ export function App() {
         row,
       },
     }));
+    setStatus(`Selected palette tile (${col}, ${row})`);
   };
 
   const addBrushEffect = () => {
@@ -1143,14 +1170,48 @@ export function App() {
             <select
               value={String(zoom)}
               onChange={(event) => {
-                setZoom(Number(event.target.value));
+                changeZoom(Number(event.target.value));
               }}
             >
-              <option value="2">2x</option>
-              <option value="4">4x</option>
-              <option value="6">6x</option>
+              {ZOOM_LEVELS.map((zoomLevel) => (
+                <option key={zoomLevel} value={zoomLevel}>
+                  {zoomLevel}x
+                </option>
+              ))}
             </select>
           </label>
+
+          <div className="zoom-controls" aria-label="Zoom controls">
+            <button
+              className="toolbar-button toolbar-button--compact"
+              disabled={zoom <= ZOOM_LEVELS[0]}
+              type="button"
+              onClick={() => {
+                stepZoom(-1);
+              }}
+            >
+              −
+            </button>
+            <button
+              className="toolbar-button toolbar-button--compact"
+              disabled={zoom >= ZOOM_LEVELS[ZOOM_LEVELS.length - 1]}
+              type="button"
+              onClick={() => {
+                stepZoom(1);
+              }}
+            >
+              +
+            </button>
+          </div>
+
+          <button
+            className="toolbar-button"
+            disabled={!currentLevel}
+            type="button"
+            onClick={moveToPlayerStart}
+          >
+            Player Start
+          </button>
 
           <label className="checkbox">
             <input
@@ -1211,6 +1272,7 @@ export function App() {
             {describeEffects(brush.effects)}
           </div>
           <div>Controls • left drag paints • right click picks • middle drag pans</div>
+          <div>Viewport • Player Start centers spawn • zoom buttons keep current center</div>
         </div>
 
         {loadError ? <div className="error-box">{loadError}</div> : null}
@@ -1224,16 +1286,37 @@ export function App() {
         <aside className="sidebar">
           <section className="editor-panel">
             <h2>Palette</h2>
-            <canvas
-              ref={paletteCanvasRef}
-              className="palette-canvas"
-              onContextMenu={(event) => {
-                event.preventDefault();
-              }}
-              onPointerDown={(event) => {
-                void handlePalettePointerDown(event);
-              }}
-            />
+            <div className="palette-grid" role="grid" aria-label="Tile palette">
+              {paletteTiles.map(({ col, row }) => {
+                const tileSize = TILESETS.pastoral.tileSize * PALETTE_SCALE;
+                const isSelected =
+                  brush.sprite.tileset === "pastoral" &&
+                  brush.sprite.col === col &&
+                  brush.sprite.row === row;
+
+                return (
+                  <button
+                    aria-label={`Select tile ${col}, ${row}`}
+                    aria-pressed={isSelected}
+                    className={`palette-tile${isSelected ? " palette-tile--selected" : ""}`}
+                    key={`${col}:${row}`}
+                    role="gridcell"
+                    style={{
+                      backgroundImage: `url("${TILESETS.pastoral.src}?v=${cacheBust}")`,
+                      backgroundPosition: `-${col * tileSize}px -${row * tileSize}px`,
+                      backgroundSize: `${TILESETS.pastoral.columns * tileSize}px ${TILESETS.pastoral.rows * tileSize}px`,
+                      height: tileSize,
+                      width: tileSize,
+                    }}
+                    title={`Tile ${col}, ${row}`}
+                    type="button"
+                    onClick={() => {
+                      selectPaletteTile(col, row);
+                    }}
+                  />
+                );
+              })}
+            </div>
             <div className="effect-legend">
               {TILE_EFFECT_TYPES.map((effectType) => (
                 <div className="effect-legend__item" key={effectType}>
